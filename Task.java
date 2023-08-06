@@ -17,4 +17,7 @@ public class Task {
     public void setTime(int time) {
         this.time = time;
     }
+    public String toString() {
+        return this.name + ", " + (this.time%60==0?this.time/60+"h":this.time+"m");
+    }
 }
