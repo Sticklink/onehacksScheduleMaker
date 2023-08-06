@@ -1,4 +1,5 @@
 public class Time {
+    public static final Time NULL = new Time(-1,-1);
     private int hour;
     private int minute;
     public Time(int hour, int minute) {
