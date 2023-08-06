@@ -1,12 +1,9 @@
 import javax.swing.*;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleScreen extends JPanel {
     JFrame frame = new JFrame("Schedule");
-
-    List<Task> taskList = new ArrayList<>();
 
     public void addText(String text, int x, int y, int size, boolean bold) {
         JLabel label = new JLabel(text);
@@ -18,16 +15,15 @@ public class ScheduleScreen extends JPanel {
         addText(text,x,y,size,false);
     }
 
-    public ScheduleScreen() {
-        ScheduleCreator scheduleCreator = new ScheduleCreator(taskList);
+    public ScheduleScreen(List<Task> taskList) {
 
-        taskList.add(new Task("Crying", 90));
-        taskList.add(new Task("Nap", 240));
+        ScheduleCreator scheduleCreator = new ScheduleCreator(taskList);
+        List<Task> schedule = scheduleCreator.createSchedule();
 
         addText("Your Schedule", 200,0,24,true);
 
         int i=0;
-        for (Task task : taskList) {
+        for (Task task : schedule) {
             addText(task.toString(),30,50+i*40,18);
             i++;
         }
@@ -35,9 +31,5 @@ public class ScheduleScreen extends JPanel {
         frame.setSize(600,600);
         frame.setLayout(null);
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new ScheduleScreen();
     }
 }

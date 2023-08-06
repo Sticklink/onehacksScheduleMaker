@@ -5,7 +5,7 @@ public class Task {
     public Task(String name, int duration, Time time) {
         this.name=name;
         this.duration=duration;
-        this.time=time;
+        this.time=time.copy();
     }
 
     public Task(String name, int duration) {
@@ -25,7 +25,7 @@ public class Task {
         this.time = time;
     }
     public String toString() {
-        return this.name + ", " + (this.duration%60==0?this.duration/60+"h":this.duration+"m");
+        return this.name + ", " + (this.duration%60==0?this.duration/60+"h":this.duration+"m") + " ------ " + this.time.toString();
     }
 
     public int getDuration() {

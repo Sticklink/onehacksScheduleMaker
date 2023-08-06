@@ -6,11 +6,11 @@ import static java.lang.Integer.parseInt;
 
 public class InputScreen {
     JFrame window;
-    List<Task> data;
+    public List<Task> data;
     JTextField[] activityFields;
     JTextField[] timeFields;
 
-    InputScreen(){
+    public InputScreen(){
         window = new JFrame("Tasks");
         // create help
         // create input fields
@@ -50,11 +50,5 @@ public class InputScreen {
         window.setSize(600,600);
         window.setLayout(null);
         window.setVisible(true);
-    }
-
-
-
-    public static void main(String[] args) {
-        new InputScreen();
     }
 }

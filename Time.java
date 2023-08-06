@@ -8,13 +8,21 @@ public class Time {
     }
 
     public String toString() {
-        return this.hour+":"+this.minute;
+        return
+                (this.hour==0?"12":this.hour)+":"+
+                        (this.minute == 0?"00":this.minute);
+    }
+
+    public Time copy() {
+        return new Time(this.hour,this.minute);
     }
 
     public void addMinutes(int minutes) {
         this.minute += minutes;
-        this.hour += minutes/60;
-        this.minute %= 60;
+        while (this.minute >= 60) {
+            this.minute -=60;
+            this.hour++;
+        }
         this.hour %= 12;
     }
 }
