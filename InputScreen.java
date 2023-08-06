@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,15 +35,12 @@ public class InputScreen {
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(250, 400, 100, 30);
         submitButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 0; i < 8; i++) {
-                            String activity = activityFields[i].getText();
-                            int time;
-                            try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 0;}
-                            data[i] = new Task(activity, time);
-                        }
+                e -> {
+                    for (int i = 0; i < 8; i++) {
+                        String activity = activityFields[i].getText();
+                        int time;
+                        try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 0;}
+                        data.add(new Task(activity, time));
                     }
                 }
         );
