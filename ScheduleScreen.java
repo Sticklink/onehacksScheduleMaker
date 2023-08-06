@@ -19,6 +19,8 @@ public class ScheduleScreen extends JPanel {
     }
 
     public ScheduleScreen() {
+        ScheduleCreator scheduleCreator = new ScheduleCreator(taskList);
+
         taskList.add(new Task("Crying", 90));
         taskList.add(new Task("Nap", 240));
 

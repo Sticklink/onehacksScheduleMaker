@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
 public class InputScreen {
     JFrame window;
-    Task[] data;
+    List<Task> data;
     JTextField[] activityFields;
     JTextField[] timeFields;
 
@@ -16,7 +18,7 @@ public class InputScreen {
         // create input fields
         activityFields = new JTextField[8];
         timeFields = new JTextField[8];
-        data = new Task[8];
+        data = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             JTextField activity = new JTextField();
             activity.setBounds(50, 100 + 30 * i, 300, 25);
