@@ -11,6 +11,8 @@ public class InputScreen {
     JTextField[] activityFields;
     JTextField[] timeFields;
 
+    JLabel errorMessage;
+
     public void setVisiblity (boolean visible) {
         frame.setVisible(visible);
     }
@@ -18,6 +20,10 @@ public class InputScreen {
     public InputScreen(){
         frame = new JFrame("Tasks");
         frame.getContentPane().setBackground(new Color(170,230,250));
+
+        errorMessage = new JLabel("");
+        errorMessage.setBounds(200, 450, 200, 25 );
+        frame.add(errorMessage);
 
         JLabel taskLabel = new JLabel("Task Name");
         taskLabel.setBounds(50,50,200,50);
@@ -52,15 +58,25 @@ public class InputScreen {
         submitButton.setBounds(250, 400, 100, 30);
         submitButton.addActionListener(
                 e -> {
-                    taskList.clear();
-                    for (int i = 0; i < 8; i++) {
-                        String activity = activityFields[i].getText();
-                        int time;
-                        try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 30;}
-                        if (activity.length()>0) taskList.add(new Task(activity, time));
+                    try {
+                        taskList.clear();
+                        for (int i = 0; i < 8; i++) {
+                            String activity = activityFields[i].getText();
+                            int time;
+                            try {
+                                time = parseInt(timeFields[i].getText());
+                            } catch (Exception ex) {
+                                time = 30;
+                            }
+                            if (activity.length() > 0) taskList.add(new Task(activity, time));
+                        }
+                        setVisiblity(false);
+                        new ScheduleScreen(taskList, this);
+                        errorMessage.setText("");
+                    } catch (Exception ex) {
+                        setVisiblity(true);
+                        errorMessage.setText(ex.toString());
                     }
-                    setVisiblity(false);
-                    new ScheduleScreen(taskList, this);
                 }
         );
         frame.add(submitButton);
