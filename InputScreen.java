@@ -11,6 +11,10 @@ public class InputScreen {
     JTextField[] activityFields;
     JTextField[] timeFields;
 
+    public void setVisiblity (boolean visible) {
+        frame.setVisible(visible);
+    }
+
     public InputScreen(){
         frame = new JFrame("Tasks");
         frame.getContentPane().setBackground(new Color(170,230,250));
@@ -40,6 +44,8 @@ public class InputScreen {
             timeFields[i] = activity;
         }
 
+
+
         // create submit button
 
         JButton submitButton = new JButton("Submit");
@@ -53,7 +59,8 @@ public class InputScreen {
                         try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 30;}
                         if (activity.length()>0) taskList.add(new Task(activity, time));
                     }
-                    new ScheduleScreen(taskList);
+                    setVisiblity(false);
+                    new ScheduleScreen(taskList, this);
                 }
         );
         frame.add(submitButton);
@@ -62,5 +69,6 @@ public class InputScreen {
         frame.setSize(600,600);
         frame.setLayout(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
