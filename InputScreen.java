@@ -7,7 +7,7 @@ import static java.lang.Integer.parseInt;
 
 public class InputScreen {
     JFrame frame;
-    public List<Task> data;
+    public List<Task> taskList;
     JTextField[] activityFields;
     JTextField[] timeFields;
 
@@ -26,7 +26,7 @@ public class InputScreen {
         // create input fields
         activityFields = new JTextField[8];
         timeFields = new JTextField[8];
-        data = new ArrayList<>();
+        taskList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             JTextField activity = new JTextField();
             activity.setBounds(50, 100 + 30 * i, 300, 25);
@@ -46,13 +46,14 @@ public class InputScreen {
         submitButton.setBounds(250, 400, 100, 30);
         submitButton.addActionListener(
                 e -> {
+                    taskList.clear();
                     for (int i = 0; i < 8; i++) {
                         String activity = activityFields[i].getText();
                         int time;
                         try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 30;}
-                        if (activity.length()>0) data.add(new Task(activity, time));
+                        if (activity.length()>0) taskList.add(new Task(activity, time));
                     }
-                    new ScheduleScreen(data);
+                    new ScheduleScreen(taskList);
                 }
         );
         frame.add(submitButton);

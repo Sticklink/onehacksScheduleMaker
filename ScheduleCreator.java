@@ -10,9 +10,14 @@ public class ScheduleCreator {
     public List<Task> createSchedule() {
         List<Task> schedule = new ArrayList<>();
         final Time startTime = new Time(4,0);
+
         final Time dinnerTime = new Time(7,0);
         final int dinnerLength = 60;
-        final int allottedTime = 300; // 4 - 10, without 7-8 for dinner: 5h/300m
+
+        final Time dinnerEndTime = dinnerTime.copy();
+        dinnerEndTime.addMinutes(dinnerLength);
+
+        final int allottedTime = 360-dinnerLength; // 4 - 10, without 7-8 for dinner: 5h/300m
         int totalTaskDuration = 0;
         for (Task task:taskList) {
             totalTaskDuration += task.getDuration();
@@ -28,13 +33,27 @@ public class ScheduleCreator {
             schedule.add(new Task("Break", breakLength,taskTime.copy()));
             taskTime.addMinutes(breakLength);
         }
+        schedule.remove(schedule.size()-1); // remove last break
+
+
+        List<Task> scheduleWithDinner = new ArrayList<>();
         for (Task task:schedule) {
-            if (task.getTime().comesAtOrAfter(dinnerTime)) {
+            boolean afterDinner = task.getTime().comesAtOrAfter(dinnerTime);
+            if (afterDinner) {
                 task.moveForward(dinnerLength);
-                System.out.println(3);
+            } else if (task.endTime().comesAtOrAfter(dinnerTime)) {
+                int initialCutoff = task.getTime().minutesUntil(dinnerTime);
+                int normalDuration = task.getDuration();
+                task.setDuration(initialCutoff);
+                scheduleWithDinner.add(task);
+                scheduleWithDinner.add(new Task("Dinner",dinnerLength,dinnerTime));
+                scheduleWithDinner.add(new Task(task.getName(),normalDuration-initialCutoff,dinnerEndTime));
+                continue;
             }
+            scheduleWithDinner.add(task);
         }
-        return schedule;
+
+        return scheduleWithDinner;
     }
 
 }

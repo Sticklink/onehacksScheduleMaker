@@ -20,9 +20,13 @@ public class Time {
     }
 
     public boolean comesAtOrAfter(Time time) {
-        if (this.am && !time.am) return true;
-        if (this.hour>time.hour) return true;
+        if (this.am != time.am) return this.am;
+        if (this.hour != time.hour) return this.hour>time.hour;
         return this.minute >= time.minute;
+    }
+
+    public int minutesUntil(Time t) {
+        return (t.hour-this.hour)*60+t.minute-this.minute;
     }
 
     public void addMinutes(int minutes) {

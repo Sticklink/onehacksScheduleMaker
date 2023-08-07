@@ -24,11 +24,11 @@ public class ScheduleScreen extends JPanel {
 
         int i=0;
         for (Task task : schedule) {
-            addText(task.toString(),30,50+i*40,18);
+            addText(task.toString(),30,50+i*30,18);
             i++;
         }
 
-        frame.setSize(600,Math.max(taskList.size()*100,600));
+        frame.setSize(600,200+Math.max(taskList.size()*70,600));
         frame.getContentPane().setBackground(new Color(170,230,250));
         frame.setLayout(null);
         frame.setVisible(true);

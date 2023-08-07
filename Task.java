@@ -18,6 +18,12 @@ public class Task {
     public Time getTime() {
         return this.time;
     }
+
+    public Time endTime() {
+        Time end = this.time.copy();
+        end.addMinutes(this.duration);
+        return end;
+    }
     public void setName(String name) {
         this.name=name;
     }
