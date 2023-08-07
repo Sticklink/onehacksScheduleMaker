@@ -22,7 +22,7 @@ public class ScheduleCreator {
         for (Task task:taskList) {
             totalTaskDuration += task.getDuration();
         }
-        double breakAmt = Math.max(0, (double)allottedTime/totalTaskDuration - 1);
+        double breakAmt = Math.min(Math.max(0, (double)allottedTime/totalTaskDuration - 1),0.5);
 
 
         Time taskTime = startTime.copy();
