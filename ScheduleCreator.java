@@ -30,8 +30,10 @@ public class ScheduleCreator {
             schedule.add(new Task(task.getName(),task.getDuration(), taskTime.copy()));
             taskTime.addMinutes(task.getDuration());
             int breakLength = (int)(task.getDuration()*breakAmt);
-            schedule.add(new Task("Break", breakLength,taskTime.copy()));
-            taskTime.addMinutes(breakLength);
+            if (breakLength>0) {
+                schedule.add(new Task("Break", breakLength, taskTime.copy()));
+                taskTime.addMinutes(breakLength);
+            }
         }
         schedule.remove(schedule.size()-1); // remove last break
 
