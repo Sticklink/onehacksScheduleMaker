@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Font;
+import java.awt.*;
 import java.util.List;
 
 public class ScheduleScreen extends JPanel {
@@ -7,7 +7,7 @@ public class ScheduleScreen extends JPanel {
 
     public void addText(String text, int x, int y, int size, boolean bold) {
         JLabel label = new JLabel(text);
-        label.setBounds(x,y,200,50);
+        label.setBounds(x,y,400,50);
         label.setFont(new Font("Trebuchet MS", bold?Font.BOLD:Font.PLAIN, size));
         frame.add(label);
     }
@@ -28,7 +28,8 @@ public class ScheduleScreen extends JPanel {
             i++;
         }
 
-        frame.setSize(600,600);
+        frame.setSize(600,Math.max(taskList.size()*100,600));
+        frame.getContentPane().setBackground(new Color(170,230,250));
         frame.setLayout(null);
         frame.setVisible(true);
     }

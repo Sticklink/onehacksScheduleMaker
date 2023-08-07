@@ -24,6 +24,9 @@ public class Task {
     public void setTime(Time time) {
         this.time = time;
     }
+    public void moveForward(int minutes) {
+        this.time.addMinutes(minutes);
+    }
     public String toString() {
         return this.name + ", " + (this.duration%60==0?this.duration/60+"h":this.duration+"m") + " ------ " + this.time.toString();
     }
