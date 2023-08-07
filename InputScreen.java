@@ -40,8 +40,9 @@ public class InputScreen {
                         String activity = activityFields[i].getText();
                         int time;
                         try {time = parseInt(timeFields[i].getText());} catch (Exception ex) {time = 0;}
-                        data.add(new Task(activity, time));
+                        if (activity.length()>0) data.add(new Task(activity, time));
                     }
+                    new ScheduleScreen(data);
                 }
         );
         window.add(submitButton);
