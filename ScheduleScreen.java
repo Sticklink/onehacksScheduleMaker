@@ -43,6 +43,7 @@ public class ScheduleScreen extends JPanel {
 
         frame.setSize(600,200+Math.max(taskList.size()*70,600));
         frame.getContentPane().setBackground(new Color(170,230,250));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         frame.setLayout(null);
         frame.setVisible(true);
     }

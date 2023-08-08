@@ -19,6 +19,7 @@ public class InputScreen {
 
     public InputScreen(){
         frame = new JFrame("Tasks");
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         frame.getContentPane().setBackground(new Color(170,230,250));
 
         errorMessage = new JLabel("");
